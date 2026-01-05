@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -11,16 +12,11 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-//@Table(
-//        name="patients",
-//        indexes = {
-//                @Index(name = "idx_patient_email", columnList = "email"),
-//                @Index(name = "idx_patient_name", columnList = "name")
-//        }
-//)
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @UuidGenerator
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
     @Column(nullable = false, length = 100)
